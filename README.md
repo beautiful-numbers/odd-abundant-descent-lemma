@@ -38,7 +38,7 @@ It uses a lightweight PNT-style approximation for `pi(y)` and a multi-scale grid
 *   `--envelope theta`: Labeled “theta” in the paper.
 *   `--envelope coarse`: A coarser variant for sanity checks.
 
-You may subtract a constant structural decrement with `--delta-const`. In `pivot` mode, you can enable a cumulative structural correction with `--struct`.
+You may subtract a constant structural decrement with `--delta-const`. 
 
 ## Command Reference
 
@@ -48,7 +48,7 @@ The script accepts the following arguments:
 *   `--digits`: Target decimal digit count $D$.
 *   `--f-dem`: Marginal abundance demand $f_{\mathrm{dem}}$.
 *   `--envelope`: `theta` or `coarse`.
-*   `--tol`: Multiplicative tolerance for the envelope.
+*   `--tol`: Numerical tolerance used in the SUFF/FAIL decision: compare \(f_{\text{off,eff}}\) to \(f_{\text{dem}}-\text{tol}\).
 *   `--y-mult-max`, `--y-mult-steps`, `--y-pow-steps`: Grid parameters for the search over $y$.
 *   `--delta-const`: Additive structural decrement $\Delta_{\mathrm{struct}}$.
 *   `--struct`: Use cumulative structural correction (pivot mode only).
