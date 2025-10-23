@@ -48,7 +48,7 @@ The script accepts the following arguments:
 *   `--digits`: Target decimal digit count $D$.
 *   `--f-dem`: Marginal abundance demand $f_{\mathrm{dem}}$.
 *   `--envelope`: `theta` or `coarse`.
-*   `--tol`: Numerical tolerance used in the SUFF/FAIL decision: compare \(f_{\text{off,eff}}\) to \(f_{\text{dem}}-\text{tol}\).
+*   `--tol`: Numerical tolerance used in the SUFF/FAIL decision: compare $f_{\text{off,eff}}$ to $f_{\text{dem}}-\text{tol}$.
 *   `--y-mult-max`, `--y-mult-steps`, `--y-pow-steps`: Grid parameters for the search over $y$.
 *   `--delta-const`: Additive structural decrement $\Delta_{\mathrm{struct}}$.
 *   `--struct`: Use cumulative structural correction (pivot mode only).
