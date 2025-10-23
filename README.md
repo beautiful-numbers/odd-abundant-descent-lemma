@@ -110,23 +110,6 @@ Let \(B = D \cdot \ln 10\). The envelope \(f_{\text{off}}\) is estimated over a 
 - `--y-mult-steps <int>` (default: `30`)  
   Number of geometric multipliers between `0.1` and `K` for the region \(y = m\cdot B\).
 
-### Output schema
-
-**`--mode test`** returns:
-```json
-{
-  "digits": <int>,            // D rounded down
-  "status": "SUFF"|"FAIL",    // decision using f_off_eff vs f_dem - tol
-  "f_off_eff": <float>,       // max envelope minus delta_const
-  "f_dem": <float>,           // demanded threshold
-  "tol": <float>,             // tolerance used in comparison
-  "envelope": "coarse"|"theta",
-  "delta_const": <float>,
-  "y_mult_max": <float>,
-  "y_pow_steps": <int>,
-  "y_mult_steps": <int>
-}
-
 
 ## Examples
 
