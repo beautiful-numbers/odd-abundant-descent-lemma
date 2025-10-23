@@ -54,6 +54,82 @@ python refine_structural_failure.py --mode pivot --digits-lo <Dlo> --digits-hi <
 
 Output is a deterministic JSON object printed to `stdout`.
 
+## Command-line Interface (CLI)
+
+> Place this section right after **Usage** and before **Examples**.
+
+This tool emits JSON and has two modes: **`test`** (single D) and **`pivot`** (find the first failure threshold in digits).  
+Let \(B = D \cdot \ln 10\). The envelope \(f_{\text{off}}\) is estimated over a grid of \(y\) values.
+
+### Required arguments
+
+- `--mode {test,pivot}`  
+  Selects the workflow:
+  - `test`: evaluate a single `D` and return `SUFF`/`FAIL`.
+  - `pivot`: iteratively bracket the first `FAIL` after at least one `SUFF`.
+
+- `--f-dem <float>`  
+  The demanded threshold \(f_{\text{dem}}\). A configuration is **SUFF** iff  
+  \(f_{\text{off,eff}} \ge f_{\text{dem}} - \text{tol}\).
+
+- For **`test`** mode (exactly one of these is required for the digits):
+  - `--digits <float>`  
+    The target \(D\) (number of base-10 digits), internally using \(B=D\ln 10\).
+
+- For **`pivot`** mode (provide a starting bracket):
+  - `--digits-lo <float>`  
+    Lower end of the search bracket for \(D\).
+  - `--digits-hi <float>`  
+    Upper end of the search bracket for \(D\).
+
+### Optional arguments
+
+- `--rounds <int>` (default: `8`) **[pivot only]**  
+  How many refinement rounds to tighten the \([D_{\text{lo}}, D_{\text{hi}}]\) bracket.
+
+- `--N <int>` (default: `301`) **[pivot only]**  
+  Number of geometrically spaced test points per round between `digits-lo` and `digits-hi`.
+
+- `--tol <float>` (default: `5e-4`)  
+  Numerical tolerance used in the SUFF/FAIL decision: compare \(f_{\text{off,eff}}\) to \(f_{\text{dem}}-\text{tol}\).
+
+- `--envelope {coarse,theta}` (default: `theta`)  
+  Chooses the off-the-shelf envelope:
+  - `coarse`: \(f_{\text{off}}(B,y) \approx \pi(y)/B\) (max tends to occur at large \(y\)).
+  - `theta`:  \(f_{\text{off}}(B,y) \approx \pi(y)/(B+y)\) (uses \( \theta(y)\sim y\)).  
+  *Note:* both use fast PNT-style approximations for \(\pi(y)\).
+
+- `--delta-const <float>` (default: `0.0`)  
+  Constant “tax” subtracted from the envelope to model structural penalties:  
+  \(f_{\text{off,eff}} = f_{\text{off}} - \text{delta\_const}\).
+
+- `--y-mult-max <float>` (default: `100.0`)  
+  Scans the \(y\) grid up to \(K\cdot B\) with `K = y-mult-max`.
+
+- `--y-pow-steps <int>` (default: `20`)  
+  Number of power-scale steps for the region \(y < B\).
+
+- `--y-mult-steps <int>` (default: `30`)  
+  Number of geometric multipliers between `0.1` and `K` for the region \(y = m\cdot B\).
+
+### Output schema
+
+**`--mode test`** returns:
+```json
+{
+  "digits": <int>,            // D rounded down
+  "status": "SUFF"|"FAIL",    // decision using f_off_eff vs f_dem - tol
+  "f_off_eff": <float>,       // max envelope minus delta_const
+  "f_dem": <float>,           // demanded threshold
+  "tol": <float>,             // tolerance used in comparison
+  "envelope": "coarse"|"theta",
+  "delta_const": <float>,
+  "y_mult_max": <float>,
+  "y_pow_steps": <int>,
+  "y_mult_steps": <int>
+}
+
+
 ## Examples
 
 ### Run a single SUFF or FAIL test
