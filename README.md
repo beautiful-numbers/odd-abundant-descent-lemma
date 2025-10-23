@@ -145,10 +145,11 @@ If you use this repository in your work, please cite both the paper and the code
 ### Paper
 > D. Sautot (2025).  
 > *An Explicit Descent Lemma Forcing Central Divisors in Odd Abundant Integers*.  
-> arXiv DOI: `10.48550/arXiv.XXXX.XXXXX` (replace with your identifier)
+> (Preprint to be submitted)
 
 ### Repository
-> https://github.com/[USER]/odd-abundance-descent (replace with your username)
+> D. Sautot (2025). *Structural Descent Envelope for Odd Abundant Integers* (v1.0.0) [Software].  
+> https://github.com/beautiful-numbers/odd-abundant-descent-lemma
 
 ## License
 
