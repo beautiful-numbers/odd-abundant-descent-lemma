@@ -56,8 +56,6 @@ Output is a deterministic JSON object printed to `stdout`.
 
 ## Command-line Interface (CLI)
 
-> Place this section right after **Usage** and before **Examples**.
-
 This tool emits JSON and has two modes: **`test`** (single D) and **`pivot`** (find the first failure threshold in digits).  
 Let \(B = D \cdot \ln 10\). The envelope \(f_{\text{off}}\) is estimated over a grid of \(y\) values.
 
